@@ -16,7 +16,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image }}
-          imagePullPolicy: Never
+          imagePullPolicy: Always
           env: ## Env variables to pass
             - name: NEO4J_dbms_security_auth__enabled
               value: "false"

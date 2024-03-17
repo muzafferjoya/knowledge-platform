@@ -30,7 +30,7 @@ spec:
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.repository }}:{{ .Values.image_tag }}"
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         env:
         - name: JAVA_OPTIONS
           value: {{ .Values.env.javaoptions | quote }}

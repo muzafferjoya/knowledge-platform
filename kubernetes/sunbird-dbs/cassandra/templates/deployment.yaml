@@ -18,6 +18,23 @@ spec:
           image: cassandra:3.11.11
           ports:
             - containerPort: {{ .Values.network.port }}
+          volumeMounts:
+            - name: data-volume
+              mountPath: /mnt/backups/cassandra_backup
+      volumes:
+      - name: data-volume
+        hostPath:
+          path: /home/ubuntu/sunbird-dbs/cassandra/cassandra_backup
+          type: Directory
+      #     volumeMounts:
+      #       - name: my-volume
+      #         mountPath: /mnt/data
+      # volumes:
+      #   - name: my-volume
+      #     persistentVolumeClaim:
+      #       claimName: my-pvc
+
+          
 ---
 apiVersion: v1
 kind: Service
