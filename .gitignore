@@ -2,5 +2,5 @@
 **/target/**
 **/.idea/**
 **/*.iml
-**/application.conf
+#**/application.conf
 *.conf
