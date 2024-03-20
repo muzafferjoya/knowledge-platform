@@ -1,4 +1,6 @@
-namespace: knowlg-api
+### Default variable file for search-service ###
+
+api_namespace: knowlg-api
 
 env:
   javaoptions: -Xmx600m
@@ -14,9 +16,12 @@ resources:
     cpu: 1
     memory: 1024Mi
 network:
-  port: 9000
+  port: 9006
   targetport: 9000
 strategy:
   type: RollingUpdate
   maxsurge: 25%
   maxunavailable: 25%
+serviceType: ClusterIP
+es_connection: elasticsearch.knowlg-db.svc.cluster.local:9200
+

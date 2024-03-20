@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -c -f es.yaml
+    kompose.version: 1.32.0 (765fde254)
+  labels:
+    io.kompose.service: elasticsearch
+  name: elasticsearch
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: elasticsearch
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -c -f es.yaml
+        kompose.version: 1.32.0 (765fde254)
+      labels:
+        io.kompose.network/es-docker-default: "true"
+        io.kompose.service: elasticsearch
+    spec:
+      containers:
+        - env:
+            - name: discovery.type
+              value: single-node
+          image: docker.elastic.co/elasticsearch/elasticsearch:6.8.22
+          name: sunbird-es
+          ports:
+            - containerPort: 9300
+              hostPort: 9300
+              protocol: TCP
+            - containerPort: 9200
+              hostPort: 9200
+              protocol: TCP
+      #     volumeMounts:
+      #     - name: es-datas
+      #       mountPath: /usr/share/elasticsearch/data
+      #     - name: es-logs
+      #       mountPath: /usr/share/elasticsearch/logs
+      #     - name: es-backups
+      #       mountPath: /opt/elasticsearch/backup
+      # volumes:
+      # - name: es-data
+      #   hostPath:
+      #     path: ~/sunbird-dbs/es/data
+      # - name: es-logs
+      #   hostPath:
+      #     path: ~/sunbird-dbs/es/logs
+      # - name: es-backups
+      #   hostPath:
+      #     path: ~/sunbird-dbs/es/backups      
+      restartPolicy: Always
+
