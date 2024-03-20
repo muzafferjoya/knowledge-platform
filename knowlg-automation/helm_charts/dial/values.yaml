@@ -4,8 +4,8 @@ env:
   javaoptions: -Xmx600m
 
 replicaCount: 1
-repository: docker.io/aimansharief/dial-service
-image_tag: R5.2.0
+repository: muzafferjoya/dial-service
+image_tag: R6.0.0
 resources:
   requests:
     cpu: 100m
